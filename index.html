@@ -597,7 +597,7 @@ function updateRace(dt,now){
       race.laneIntro=true;
     } else {
       race.laneIntro=false;
-      const countdownEl=el-1.5;
+      const countdownEl=el-3;
       race.countdown=Math.max(0,3-Math.floor(countdownEl));
       if(countdownEl>=3){race.started=true;race.raceStartTime=now;}
     }
