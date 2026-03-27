@@ -200,7 +200,7 @@ const SPONSORS = {
     { name: "Midas Car Care",   logo: "logos/midas.png" },  // Lane 1
     { name: "Pizza Palace",     logo: "logos/pizza.png" },  // Lane 2
     { name: "Smith Family",     logo: "logos/smith.png" },  // Lane 3
-    { name: "ACE Hardware",     logo: "ace/pizza.png" },  // Lane 4
+    { name: "ACE Hardware",     logo: "logos/ace.png" },  // Lane 4
   ],
   results:     { name: "Trophy House",   logo: "logos/trophy.png" },
   leaderboard: { name: "Midas Car Care", logo: "logos/midas.png" },
@@ -1117,17 +1117,24 @@ function startGame(){
 window.addEventListener('load',async()=>{
   setupSteering();loadLeaderboard();
   try{const r=await window.storage.get('pinewood-played');if(r)state.hasPlayedBefore=true;}catch(e){}
+  
   // Build title screen from sponsor config
   const titleEl=document.getElementById('startTitle');
   if(titleEl){
     const lb=SPONSORS.leaderboard;
     const raceName='THE '+lb.name.toUpperCase()+' DIGITAL DERBY';
+    const lbImg=_sponsorImgs['leaderboard'];
+    const logoHtml=lbImg
+      ? `<img src="${lbImg.src}" alt="${lb.name}" style="max-width:200px;max-height:64px;object-fit:contain;opacity:0.93;margin-bottom:10px;"/>`
+      : '';
     titleEl.innerHTML=`
+      ${logoHtml}
       <div style="font-family:'Russo One',sans-serif;font-size:22px;color:#f0c040;text-transform:uppercase;letter-spacing:2px;line-height:1.2;text-shadow:0 2px 8px rgba(240,192,64,0.3),0 0 28px rgba(240,192,64,0.2);margin-bottom:14px;">${raceName}</div>
       <div style="font-size:10px;color:rgba(184,146,46,0.6);letter-spacing:3px;text-transform:uppercase;margin-bottom:2px;">Built for:</div>
       <div style="font-family:'Russo One',sans-serif;font-size:15px;color:#b8922e;letter-spacing:3px;text-transform:uppercase;">${SPONSORS.pack}</div>
     `;
   }
+
 });
 </script>
 </body>
