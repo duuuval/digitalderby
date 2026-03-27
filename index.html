@@ -877,7 +877,7 @@ function drawRace(now){
       
        // ── SPONSOR HERO — card with sponsor + lane info ──
       const laneSponsor=SPONSORS.lanes[race.playerLane];
-      const cardW=w*0.72,cardH=150,cardX=(w-cardW)/2,cardY=h*0.18,cardR=10;
+      const cardW=w*0.72,cardH=185,cardX=(w-cardW)/2,cardY=h*0.15,cardR=10;
       // Card background + border (same as heat result card)
       raceCtx.fillStyle='rgba(40,32,26,0.94)';
       raceCtx.beginPath();raceCtx.roundRect(cardX,cardY,cardW,cardH,cardR);raceCtx.fill();
@@ -894,14 +894,14 @@ function drawRace(now){
       }
       // Thin rule
       raceCtx.strokeStyle='rgba(240,192,64,0.12)';raceCtx.lineWidth=1;
-      raceCtx.beginPath();raceCtx.moveTo(cardX+20,cardY+112);raceCtx.lineTo(cardX+cardW-20,cardY+112);raceCtx.stroke();
+      raceCtx.beginPath();raceCtx.moveTo(cardX+20,cardY+125);raceCtx.lineTo(cardX+cardW-20,cardY+125);raceCtx.stroke();
       // Lane + heat info at bottom of card
       raceCtx.font='bold 36px Russo One';
       raceCtx.fillStyle=GOLD;
       raceCtx.shadowColor='#f0c040';raceCtx.shadowBlur=16;
-      raceCtx.fillText('Lane '+(race.playerLane+1),w/2,cardY+133);
+      raceCtx.fillText('Lane '+(race.playerLane+1),w/2,cardY+148);
       raceCtx.font='11px Share Tech Mono';raceCtx.fillStyle='#b8922e';raceCtx.shadowBlur=0;
-      raceCtx.fillText('Heat '+(race.heat+1)+' of '+HEAT_COUNT,w/2,cardY+152);
+      raceCtx.fillText('Heat '+(race.heat+1)+' of '+HEAT_COUNT,w/2,cardY+170);
       raceCtx.shadowBlur=0;
     } else {
       // Countdown 3-2-1-GO
