@@ -890,18 +890,18 @@ function drawRace(now){
       raceCtx.fillText('SPONSORED BY',w/2,cardY+22);
       // Logo or name — large, centered in card
       if(laneSponsor){
-        drawSponsorBadge(raceCtx,'lane'+race.playerLane,laneSponsor,w/2,cardY+72,cardW-40,56);
+        drawSponsorBadge(raceCtx,'lane'+race.playerLane,laneSponsor,w/2,cardY+65,cardW-60,48);
       }
       // Thin rule
       raceCtx.strokeStyle='rgba(240,192,64,0.12)';raceCtx.lineWidth=1;
-      raceCtx.beginPath();raceCtx.moveTo(cardX+20,cardY+145);raceCtx.lineTo(cardX+cardW-20,cardY+145);raceCtx.stroke();
+      raceCtx.beginPath();raceCtx.moveTo(cardX+20,cardY+118);raceCtx.lineTo(cardX+cardW-20,cardY+118);raceCtx.stroke();
       // Lane + heat info at bottom of card
       raceCtx.font='bold 36px Russo One';
       raceCtx.fillStyle=GOLD;
       raceCtx.shadowColor='#f0c040';raceCtx.shadowBlur=16;
-      raceCtx.fillText('Lane '+(race.playerLane+1),w/2,cardY+168);
+      raceCtx.fillText('Lane '+(race.playerLane+1),w/2,cardY+148);
       raceCtx.font='11px Share Tech Mono';raceCtx.fillStyle='#b8922e';raceCtx.shadowBlur=0;
-      raceCtx.fillText('Heat '+(race.heat+1)+' of '+HEAT_COUNT,w/2,cardY+192);
+      raceCtx.fillText('Heat '+(race.heat+1)+' of '+HEAT_COUNT,w/2,cardY+170);
       raceCtx.shadowBlur=0;
     } else {
       // Countdown 3-2-1-GO
