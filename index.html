@@ -1130,14 +1130,16 @@ function startGame(){
   buildCarOptions();showScreen('carSelect');
 }
 window.addEventListener('load',async()=>{
-  function checkOrientation(){
-  const overlay=document.getElementById('landscapeOverlay');
-    if(window.innerWidth>window.innerHeight){
+   function checkOrientation(){
+    const overlay=document.getElementById('landscapeOverlay');
+    const isMobile=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    if(isMobile && window.innerWidth>window.innerHeight){
       overlay.classList.add('active');
     } else {
       overlay.classList.remove('active');
     }
   }
+
   window.addEventListener('resize', checkOrientation);
   checkOrientation();
   
