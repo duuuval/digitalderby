@@ -77,9 +77,20 @@ h2{font-family:'Russo One',sans-serif;font-size:20px;color:#f0c040;margin-bottom
 .pack-feedback.leader-feedback{font-size:20px;color:#ffe060;font-family:'Russo One',sans-serif;animation:scale-in 0.4s ease-out;text-shadow:0 0 10px #f0c040, 0 0 20px #f0c040, 0 0 40px #f0c040, 0 0 80px rgba(240,192,64,0.9), 0 0 120px rgba(240,192,64,0.7), 0 0 200px rgba(240,160,20,0.5), 0 0 300px rgba(240,140,0,0.3);}
 .avg-reveal{animation:scale-in 0.5s ease-out;}
 .avg-leader{color:#ffe060;animation:scale-in 0.5s ease-out;text-shadow:0 0 10px #f0c040, 0 0 20px #f0c040, 0 0 40px #f0c040, 0 0 80px rgba(240,192,64,0.9), 0 0 140px rgba(240,192,64,0.6), 0 0 220px rgba(240,160,20,0.4), 0 0 350px rgba(240,140,0,0.2);}
+#gameWrapper{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;height:100%;overflow:hidden;background:#1a1410;}
+#landscapeOverlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1410;z-index:100;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;}
+#landscapeOverlay.active{display:flex;}
 </style>
 </head>
 <body>
+<div id="gameWrapper">
+
+<div id="landscapeOverlay">
+<div style="font-size:48px;margin-bottom:20px;">📱</div>
+<div style="font-family:'Russo One',sans-serif;font-size:22px;color:#f0c040;letter-spacing:2px;margin-bottom:12px;">ROTATE YOUR DEVICE</div>
+<div style="font-size:13px;color:#b8922e;letter-spacing:1px;">This game is best in portrait mode</div>
+</div>
+
 <div id="startScreen" class="screen active">
   <div id="startTitle" style="text-align:center;margin-bottom:6px;">
     <!-- Populated by JS from SPONSORS config -->
@@ -538,7 +549,17 @@ function actuallyStartRace(){
   resizeRC();window.onresize=resizeRC;
   showTutorialIfNeeded(()=>startHeat());
 }
-function resizeRC(){const d=window.devicePixelRatio||1;raceCanvas.width=window.innerWidth*d;raceCanvas.height=window.innerHeight*d;raceCanvas.style.width=window.innerWidth+'px';raceCanvas.style.height=window.innerHeight+'px';}
+
+function resizeRC(){
+  const d=window.devicePixelRatio||1;
+  const wrapper=document.getElementById('gameWrapper');
+  const cw=wrapper.offsetWidth;
+  const ch=window.innerHeight;
+  raceCanvas.width=cw*d;
+  raceCanvas.height=ch*d;
+  raceCanvas.style.width=cw+'px';
+  raceCanvas.style.height=ch+'px';
+}
 
 function startHeat(){
   const heat=state.currentHeat;
@@ -1109,6 +1130,17 @@ function startGame(){
   buildCarOptions();showScreen('carSelect');
 }
 window.addEventListener('load',async()=>{
+  function checkOrientation(){
+  const overlay=document.getElementById('landscapeOverlay');
+    if(window.innerWidth>window.innerHeight){
+      overlay.classList.add('active');
+    } else {
+      overlay.classList.remove('active');
+    }
+  }
+  window.addEventListener('resize', checkOrientation);
+  checkOrientation();
+  
   setupSteering();loadLeaderboard();
   try{const r=await window.storage.get('pinewood-played');if(r)state.hasPlayedBefore=true;}catch(e){}
   
@@ -1131,5 +1163,6 @@ window.addEventListener('load',async()=>{
 
 });
 </script>
+</div>  
 </body>
 </html>
